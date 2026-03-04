@@ -1,5 +1,5 @@
 <?php
-$string['pluginname'] = 'Inactive user reminder emails';
+$string['pluginname'] = 'Reminder mail to inactive user';
 
 $string['reminderdays'] = 'Reminder days before deactivation';
 $string['reminderdays_desc'] =
