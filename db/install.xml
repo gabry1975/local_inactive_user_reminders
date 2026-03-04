@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/inactive_user_reminders/db"
+       VERSION="2026022703"
+       COMMENT="XMLDB schema for inactive user reminder plugin"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+
+  <TABLES>
+
+    <TABLE NAME="local_iur_log"
+           COMMENT="Inactive user reminder email log">
+
+      <FIELDS>
+        <FIELD NAME="id"
+               TYPE="int"
+               LENGTH="10"
+               NOTNULL="true"
+               SEQUENCE="true"
+               COMMENT="Primary key"/>
+
+        <FIELD NAME="userid"
+               TYPE="int"
+               LENGTH="10"
+               NOTNULL="true"
+               COMMENT="User ID"/>
+
+        <FIELD NAME="daysbefore"
+               TYPE="int"
+               LENGTH="10"
+               NOTNULL="true"
+               COMMENT="Days before deactivation"/>
+
+        <FIELD NAME="timecreated"
+               TYPE="int"
+               LENGTH="10"
+               NOTNULL="true"
+               COMMENT="Time when reminder email was sent"/>
+      </FIELDS>
+
+      <KEYS>
+        <KEY NAME="primary"
+             TYPE="primary"
+             FIELDS="id"
+             COMMENT="Primary key"/>
+      </KEYS>
+
+      <INDEXES>
+        <INDEX NAME="userid_daysbefore_uix"
+               UNIQUE="true"
+               FIELDS="userid,daysbefore"
+               COMMENT="Prevent duplicate reminder emails per user and threshold"/>
+      </INDEXES>
+
+    </TABLE>
+
+  </TABLES>
+</XMLDB>
