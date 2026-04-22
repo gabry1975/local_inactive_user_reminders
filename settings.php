@@ -19,7 +19,7 @@ if ($hassiteconfig) {
         'local_inactive_user_reminders/email_subject',
         get_string('emailsubject', 'local_inactive_user_reminders'),
         '',
-        'Your account will be deactivated in {$days} days'
+        'Your account will be deleted in {$days} days'
     ));
 
     $settings->add(new admin_setting_confightmleditor(
@@ -27,7 +27,7 @@ if ($hassiteconfig) {
         get_string('emailbody', 'local_inactive_user_reminders'),
         get_string('emailbody_desc', 'local_inactive_user_reminders'),
         '<p>Hello {$firstname},</p>
-<p>Your account has been inactive and will be deactivated in <strong>{$days}</strong> days.</p>
+<p>Your account has been inactive and will be deleted in <strong>{$days}</strong> days.</p>
 <p>Please log in to keep your account active.</p>
 <p>{$sitename}</p>'
     ));

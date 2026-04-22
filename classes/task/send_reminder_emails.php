@@ -101,5 +101,26 @@ class send_reminder_emails extends \core\task\scheduled_task {
                 ]);
             }
         }
+
+        // Integrazione con Inactive user CleanUp:
+        // se l'utente supera la soglia di inattività, lo eliminiamo.
+        $cutoff = $now - ($cleanupdays * DAYSECS);
+        $usersfordeletion = $DB->get_records_sql(
+            "SELECT u.*
+               FROM {user} u
+              WHERE u.deleted = 0
+                AND u.suspended = 0
+                AND u.lastaccess > 0
+                AND u.lastaccess <= :cutoff",
+            ['cutoff' => $cutoff]
+        );
+
+        foreach ($usersfordeletion as $candidate) {
+            if (is_siteadmin($candidate->id)) {
+                continue;
+            }
+
+            \delete_user($candidate);
+        }
     }
 }
